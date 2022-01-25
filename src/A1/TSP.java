@@ -15,12 +15,12 @@ public class TSP {
     }
 
     // search all possible routes, return the cost of the shortest one
-    public float bruteForceTSP() {
+    public double bruteForceTSP() {
         return 0;
     }
 
-    // visit all cities in a random order, record path length
-    public float randomTour() {
+    // visit all cities in a random order, return cost
+    public double randomTour() {
         Random random = new Random();
         ArrayList<City> remainCities = new ArrayList<>();
         for (int i = 0; i < 7; i++) {
@@ -37,8 +37,8 @@ public class TSP {
     }
 
     // return cost of a tour
-    public float costOfTour(ArrayList<City> pTour) {
-        float cost = 0;
+    public double costOfTour(ArrayList<City> pTour) {
+        double cost = 0;
         for (int i = 0; i < 6; i++) {
             cost += costBtwCities(pTour.get(i), pTour.get(i+1));
         }
@@ -46,10 +46,10 @@ public class TSP {
     }
 
     // return the Euclidean distance between 2 cities
-    public float costBtwCities(City c1, City c2) {
-        float xDiff = c1.xCo - c2.xCo;
-        float yDiff = c1.yCo - c2.yCo;
-        return 0;
+    public double costBtwCities(City c1, City c2) {
+        double xDiff = c1.xCo - c2.xCo;
+        double yDiff = c1.yCo - c2.yCo;
+        return Math.sqrt((xDiff*xDiff) + (yDiff*yDiff));
     }
 
     // return neighbours of a state

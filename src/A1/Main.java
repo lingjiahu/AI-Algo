@@ -21,12 +21,12 @@ public class Main {
         return randomTSP;
     }
 
-    public float mean(ArrayList<Float> allPathLen) {
-        float sum = 0;
+    public double mean(ArrayList<Double> allPathLen) {
+        double sum = 0;
         for (int i = 0; i < 100; i++) {
             sum += allPathLen.get(i);
         }
-        float mean = sum / 100;
+        double mean = sum / 100;
         return mean;
     }
 
