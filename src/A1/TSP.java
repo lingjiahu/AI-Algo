@@ -38,14 +38,20 @@ public class TSP {
 
     // return cost of a tour
     public float costOfTour(ArrayList<City> pTour) {
-
+        float cost = 0;
+        for (int i = 0; i < 6; i++) {
+            cost += costBtwCities(pTour.get(i), pTour.get(i+1));
+        }
+        return cost;
     }
 
     // return the Euclidean distance between 2 cities
     public float costBtwCities(City c1, City c2) {
-
+        float xDiff = c1.xCo - c2.xCo;
+        float yDiff = c1.yCo - c2.yCo;
+        return 0;
     }
 
-    // return neighboours of a state
+    // return neighbours of a state
 
 }
