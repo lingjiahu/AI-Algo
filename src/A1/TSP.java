@@ -6,34 +6,39 @@ import java.util.Random;
 public class TSP {
     ArrayList<City> sevenCities;
 
-    public TSP() {
+    public TSP(int numCities) {
         ArrayList<City> randomCities = new ArrayList<>();
-        for (int i = 0; i < 7; i++) {
+        for (int i = 0; i < numCities; i++) {
             randomCities.add(new City());
         }
         this.sevenCities = randomCities;
     }
 
     // search all possible routes, return the cost of the shortest one
-    public double bruteForceTSP() {
+    public double bruteForceOptimalTour() {
         return 0;
     }
 
     // visit all cities in a random order, return cost
-    public double randomTour() {
+    public double randomTour(int numCities) {
         Random random = new Random();
         ArrayList<City> remainCities = new ArrayList<>();
-        for (int i = 0; i < 7; i++) {
+        for (int i = 0; i < numCities; i++) {
             remainCities.add(this.sevenCities.get(i));
         }
         ArrayList<City> tour = new ArrayList<>();
 
-        for (int i = 7; i > 0; i--) {
+        for (int i = numCities; i > 0; i--) {
             int idx = random.ints(0, i).findFirst().getAsInt();
             tour.add(remainCities.get(idx));
             remainCities.remove(idx);
         }
         return costOfTour(tour);
+    }
+
+    // search all possible routes, return the cost of the shortest one
+    public double HillClimbingOptimalTour() {
+        return 0;
     }
 
     // return cost of a tour
