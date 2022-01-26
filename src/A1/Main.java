@@ -1,7 +1,7 @@
 package A1;
 
 import java.util.ArrayList;
-import java.util.Random;
+import java.util.Collections;
 
 public class Main {
     public static void main(String[] args) {
@@ -11,14 +11,26 @@ public class Main {
         for (int i = 0; i < 100; i++) {
             BFCosts.add(randomTSPs.get(i).bruteForceOptimalTour());
         }
+        double meanCost = mean(BFCosts);
+        System.out.println("mean: " + meanCost);
+        System.out.println("min: " + Collections.min(BFCosts));
+        System.out.println("min: " + Collections.max(BFCosts));
+        System.out.println("std: " + std(BFCosts, meanCost));
+
+        System.out.println("===================================================");
 
         System.out.println("part b: 100 random tours (7 cities)");
         ArrayList<Double> randomCosts = new ArrayList<>();
         for (int i = 0; i < 100; i++) {
             randomCosts.add(randomTSPs.get(i).randomTour(7));
         }
-        double mean = mean(randomCosts);
-        System.out.println("mean: " + mean);
+        meanCost = mean(randomCosts);
+        System.out.println("mean: " + meanCost);
+        System.out.println("min: " + Collections.min(randomCosts));
+        System.out.println("min: " + Collections.max(randomCosts));
+        System.out.println("std: " + std(randomCosts, meanCost));
+
+        System.out.println("===================================================");
 
         System.out.println("part c: 100 optimal tours (7 cities) by hill climbing search");
         ArrayList<Double> HCCosts = new ArrayList<>();
@@ -49,13 +61,24 @@ public class Main {
         return randomTSP;
     }
 
-    public static double mean(ArrayList<Double> allPathCosts) {
+    public static double mean(ArrayList<Double> tourCosts) {
         double sum = 0;
         for (int i = 0; i < 100; i++) {
-            sum += allPathCosts.get(i);
+            sum += tourCosts.get(i);
         }
         double mean = sum / 100;
         return mean;
+    }
+
+    public static double std(ArrayList<Double> tourCosts, double mean) {
+        double std;
+        double sumSq = 0;
+        for (int i = 0; i < tourCosts.size(); i++) {
+            double diff = tourCosts.get(i) - mean;
+            sumSq += diff * diff;
+        }
+        std = Math.sqrt(sumSq/tourCosts.size());
+        return std;
     }
 
 
