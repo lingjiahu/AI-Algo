@@ -37,6 +37,13 @@ public class Main {
         for (int i = 0; i < 100; i++) {
             HCCosts.add(randomTSPs.get(i).HillClimbingOptimalTour());
         }
+        meanCost = mean(HCCosts);
+        System.out.println("mean: " + meanCost);
+        System.out.println("min: " + Collections.min(HCCosts));
+        System.out.println("min: " + Collections.max(HCCosts));
+        System.out.println("std: " + std(HCCosts, meanCost));
+
+        System.out.println("===================================================");
 
         randomTSPs = generateRandomTSP(100);
         System.out.println("part d-1: 100 random tours (100 cities)");
@@ -44,12 +51,24 @@ public class Main {
         for (int i = 0; i < 100; i++) {
             randomCostsD.add(randomTSPs.get(i).randomTour(100));
         }
+        meanCost = mean(randomCostsD);
+        System.out.println("mean: " + meanCost);
+        System.out.println("min: " + Collections.min(randomCostsD));
+        System.out.println("min: " + Collections.max(randomCostsD));
+        System.out.println("std: " + std(randomCostsD, meanCost));
+
+        System.out.println("===================================================");
 
         System.out.println("part d-2: 100 optimal tours (100 cities) by hill climbing search");
         ArrayList<Double> HCCostsD = new ArrayList<>();
         for (int i = 0; i < 100; i++) {
             HCCostsD.add(randomTSPs.get(i).HillClimbingOptimalTour());
         }
+        meanCost = mean(HCCostsD);
+        System.out.println("mean: " + meanCost);
+        System.out.println("min: " + Collections.min(HCCostsD));
+        System.out.println("min: " + Collections.max(HCCostsD));
+        System.out.println("std: " + std(HCCostsD, meanCost));
     }
 
     // generate 100 random TSP instances, involving numCities cities
@@ -80,7 +99,4 @@ public class Main {
         std = Math.sqrt(sumSq/tourCosts.size());
         return std;
     }
-
-
-
 }
