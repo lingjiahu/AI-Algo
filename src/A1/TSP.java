@@ -138,8 +138,7 @@ public class TSP {
     // Generating permutation using Heap Algorithm
     void permute(ArrayList<City> a, int size)
     {
-        // if size becomes 1 then collect the tour the obtained
-        // permutation
+        // if size becomes 1 then collect the tour the obtained permutation
         if (size == 1) {
             ArrayList<City> permTour = new ArrayList<>();
             for (int i = 0; i < a.size(); i++) {
