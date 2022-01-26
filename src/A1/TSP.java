@@ -159,8 +159,7 @@ public class TSP {
                 a.set(size-1, temp);
             }
 
-            // If size is even, swap ith
-            // and (size-1)th i.e last element
+            // If size is even, swap ith and (size-1)th i.e last element
             else {
                 City temp = a.get(i);
                 a.set(i, a.get(size -1));
