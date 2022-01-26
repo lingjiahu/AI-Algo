@@ -151,8 +151,7 @@ public class TSP {
         for (int i = 0; i < size; i++) {
             permute(a, size - 1);
 
-            // if size is odd, swap 0th i.e (first) and
-            // (size-1)th i.e (last) element
+            // if size is odd, swap 0th i.e (first) and (size-1)th i.e (last) element
             if (size % 2 == 1) {
                 City temp = a.get(0);
                 a.set(0, a.get(size-1));
