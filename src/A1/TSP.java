@@ -16,7 +16,7 @@ public class TSP {
             randomCities.add(new City());
         }
         this.cities = randomCities;
-        constructDT(numCities);
+//        constructDT(numCities);
     }
 
     // search all possible routes by brute force, return the cost of the shortest one
@@ -33,13 +33,14 @@ public class TSP {
 
     // visit all cities in a random order, return cost
     public double randomTour(int numCities) {
+        // TODO
         Random random = new Random();
         ArrayList<City> remainCities = new ArrayList<>();
         for (int i = 0; i < numCities; i++) {
             remainCities.add(this.cities.get(i));
         }
-        ArrayList<City> tour = new ArrayList<>();
 
+        ArrayList<City> tour = new ArrayList<>();
         for (int i = numCities; i > 0; i--) {
             int idx = random.ints(0, i).findFirst().getAsInt();
             tour.add(remainCities.get(idx));
@@ -81,7 +82,10 @@ public class TSP {
 
     // return the Euclidean distance between 2 cities
     public double costBtwCities(City c1, City c2) {
-        return this.distanceTable.get(c1).get(c2);
+        double xDiff = c1.xCo - c2.xCo;
+        double yDiff = c1.yCo - c2.yCo;
+        double distance = Math.sqrt((xDiff*xDiff) + (yDiff*yDiff));
+        return distance;
     }
 
     // return neighbours of a state
@@ -95,7 +99,7 @@ public class TSP {
     //}
     public ArrayList<ArrayList<City>> getNeighbours(ArrayList<City> curTour) {
         ArrayList<ArrayList<City>> neighbours = new ArrayList<>();
-        for (int i  = 0; i < curTour.size() - 1; i++) {
+        for (int i  = 0; i < curTour.size() - 1; i++) { // i < j
             for (int j = i+1; j < curTour.size(); j++) {
                 ArrayList<City> permutedTour = new ArrayList<>();
                 for (int k = 0; k <= i -1; k++) {
@@ -165,4 +169,7 @@ public class TSP {
             }
         }
     }
+
+
+
 }

@@ -69,6 +69,8 @@ public class Main {
         System.out.println("min: " + Collections.min(HCCostsD));
         System.out.println("min: " + Collections.max(HCCostsD));
         System.out.println("std: " + std(HCCostsD, meanCost));
+
+
     }
 
     // generate 100 random TSP instances, involving numCities cities
@@ -99,4 +101,7 @@ public class Main {
         std = Math.sqrt(sumSq/tourCosts.size());
         return std;
     }
+
+    // count the number of optimums found using local search
+
 }
