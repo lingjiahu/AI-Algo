@@ -34,14 +34,20 @@ public class Main {
 
         System.out.println("part c: 100 optimal tours (7 cities) by hill climbing search");
         ArrayList<Double> HCCosts = new ArrayList<>();
+        int cnt = 0;
         for (int i = 0; i < 100; i++) {
-            HCCosts.add(randomTSPs.get(i).HillClimbingOptimalTour());
+            double cost = randomTSPs.get(i).HillClimbingOptimalTour();
+            if (cost == BFCosts.get(i)) {
+                cnt++;
+            }
+            HCCosts.add(cost);
         }
         meanCost = mean(HCCosts);
         System.out.println("mean: " + meanCost);
         System.out.println("min: " + Collections.min(HCCosts));
         System.out.println("min: " + Collections.max(HCCosts));
         System.out.println("std: " + std(HCCosts, meanCost));
+        System.out.println("number of optimal solutions found: " + cnt);
 
         System.out.println("===================================================");
 
