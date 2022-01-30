@@ -89,13 +89,6 @@ public class TSP {
 
     // return neighbours of a state
     // neighbors of a tour is all tours with the order of any two cities visited swapped
-
-    //procedure 2optSwap(route, i, k) {
-    //    1. take route[0] to route[i-1] and add them in order to new_route
-    //    2. take route[i] to route[k] and add them in reverse order to new_route
-    //    3. take route[k+1] to end and add them in order to new_route
-    //    return new_route;
-    //}
     public ArrayList<ArrayList<City>> getNeighbours(ArrayList<City> curTour) {
         ArrayList<ArrayList<City>> neighbours = new ArrayList<>();
         for (int i  = 0; i < curTour.size() - 1; i++) { // i < j

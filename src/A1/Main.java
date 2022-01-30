@@ -67,17 +67,8 @@ public class Main {
 
         System.out.println("part d-2: 100 optimal tours (100 cities) by hill climbing search");
         ArrayList<Double> HCCostsD = new ArrayList<>();
-//        for (int i = 0; i < 100; i++) {
-//            HCCostsD.add(randomTSPs.get(i).HillClimbingOptimalTour());
-//        }
-
-        cnt = 0;
         for (int i = 0; i < 100; i++) {
-            double cost = randomTSPs.get(i).HillClimbingOptimalTour();
-            if (cost == BFCosts.get(i)) {
-                cnt++;
-            }
-            HCCostsD.add(cost);
+            HCCostsD.add(randomTSPs.get(i).HillClimbingOptimalTour());
         }
 
         meanCost = mean(HCCostsD);
@@ -115,7 +106,4 @@ public class Main {
         std = Math.sqrt(sumSq/tourCosts.size());
         return std;
     }
-
-    // count the number of optimums found using local search
-
 }
