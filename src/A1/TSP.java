@@ -1,15 +1,14 @@
 package A1;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Random;
 
 public class TSP {
     ArrayList<City> cities;
     ArrayList<City> randomTour;
-    HashMap<City, HashMap<City, Double>> distanceTable = new HashMap<>(); // table to store the distance from 1 city to any other cities
-    ArrayList<ArrayList<City>> permutations = new ArrayList<>();
+    ArrayList<ArrayList<City>> permutations = new ArrayList<>();    // stores all possible permutations of a tour
 
+    // initialize TSP with numCities cities
     public TSP(int numCities) {
         ArrayList<City> randomCities = new ArrayList<>();
         for (int i = 0; i < numCities; i++) {
@@ -32,13 +31,12 @@ public class TSP {
 
     // visit all cities in a random order, return cost
     public double randomTour(int numCities) {
-        // TODO
         Random random = new Random();
         ArrayList<City> remainCities = new ArrayList<>();
         for (int i = 0; i < numCities; i++) {
             remainCities.add(this.cities.get(i));
         }
-
+        // add all cities into tour in a random order
         ArrayList<City> tour = new ArrayList<>();
         for (int i = numCities; i > 0; i--) {
             int idx = random.ints(0, i).findFirst().getAsInt();
@@ -52,7 +50,7 @@ public class TSP {
     // search for optimal route by hill climbing, return the cost of the shortest one
     public double HillClimbingOptimalTour() {
         double minCost = Double.MAX_VALUE;
-        boolean flg = true;
+        boolean flg = true; // stop searching when flg == false, i.e. no tour in neighbourhood has a lower cost
         ArrayList<City> curBest = this.randomTour;
         while (flg) {
             flg = false;
@@ -91,16 +89,19 @@ public class TSP {
     // neighbors of a tour is all tours with the order of any two cities visited swapped
     public ArrayList<ArrayList<City>> getNeighbours(ArrayList<City> curTour) {
         ArrayList<ArrayList<City>> neighbours = new ArrayList<>();
-        for (int i  = 0; i < curTour.size() - 1; i++) { // i < j
+        // for all cities, i < j && i != j, swap city(i) & city(j)
+        for (int i  = 0; i < curTour.size() - 1; i++) {
             for (int j = i+1; j < curTour.size() && j != i; j++) {
                 ArrayList<City> permutedTour = new ArrayList<>();
+                // cities[0, i-1] remains the same
                 for (int k = 0; k < i; k++) {
                     permutedTour.add(curTour.get(k));
                 }
+                // reverse the order of nodes between city(i) & city(j)
                 for (int k = j; k >= i; k--) {
                     permutedTour.add(curTour.get(k));
                 }
-
+                // cities[j+1:] remains the same
                 for (int k = j+1; k < curTour.size(); k++) {
                     permutedTour.add(curTour.get(k));
                 }
@@ -110,10 +111,10 @@ public class TSP {
         return neighbours;
     }
 
-    // Generating permutation using Heap Algorithm
+    // generate permutation using Heap's Algorithm
+    // https://en.wikipedia.org/wiki/Heap%27s_algorithm
     void permute(ArrayList<City> a, int size)
     {
-        // if size becomes 1 then collect the tour the obtained permutation
         if (size == 1) {
             ArrayList<City> permTour = new ArrayList<>();
             for (int i = 0; i < a.size(); i++) {
@@ -125,15 +126,11 @@ public class TSP {
         for (int i = 0; i < size; i++) {
             permute(a, size - 1);
 
-            // if size is odd, swap 0th i.e (first) and (size-1)th i.e (last) element
             if (size % 2 == 1) {
                 City temp = a.get(0);
                 a.set(0, a.get(size-1));
                 a.set(size-1, temp);
-            }
-
-            // If size is even, swap ith and (size-1)th i.e last element
-            else {
+            } else {
                 City temp = a.get(i);
                 a.set(i, a.get(size -1));
                 a.set(size-1, temp);

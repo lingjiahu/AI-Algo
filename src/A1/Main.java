@@ -14,27 +14,33 @@ public class Main {
         double meanCost = mean(BFCosts);
         System.out.println("mean: " + meanCost);
         System.out.println("min: " + Collections.min(BFCosts));
-        System.out.println("min: " + Collections.max(BFCosts));
+        System.out.println("max: " + Collections.max(BFCosts));
         System.out.println("std: " + std(BFCosts, meanCost));
 
         System.out.println("===================================================");
 
         System.out.println("part b: 100 random tours (7 cities)");
         ArrayList<Double> randomCosts = new ArrayList<>();
+        int cnt = 0;
         for (int i = 0; i < 100; i++) {
-            randomCosts.add(randomTSPs.get(i).randomTour(7));
+            double cost = randomTSPs.get(i).randomTour(7);
+            if (cost == BFCosts.get(i)) {
+                cnt++;
+            }
+            randomCosts.add(cost);
         }
         meanCost = mean(randomCosts);
         System.out.println("mean: " + meanCost);
         System.out.println("min: " + Collections.min(randomCosts));
-        System.out.println("min: " + Collections.max(randomCosts));
+        System.out.println("max: " + Collections.max(randomCosts));
         System.out.println("std: " + std(randomCosts, meanCost));
+        System.out.println("number of optimal solutions found: " + cnt);
 
         System.out.println("===================================================");
 
         System.out.println("part c: 100 optimal tours (7 cities) by hill climbing search");
         ArrayList<Double> HCCosts = new ArrayList<>();
-        int cnt = 0;
+        cnt = 0;
         for (int i = 0; i < 100; i++) {
             double cost = randomTSPs.get(i).HillClimbingOptimalTour();
             if (cost == BFCosts.get(i)) {
@@ -45,7 +51,7 @@ public class Main {
         meanCost = mean(HCCosts);
         System.out.println("mean: " + meanCost);
         System.out.println("min: " + Collections.min(HCCosts));
-        System.out.println("min: " + Collections.max(HCCosts));
+        System.out.println("max: " + Collections.max(HCCosts));
         System.out.println("std: " + std(HCCosts, meanCost));
         System.out.println("number of optimal solutions found: " + cnt);
 
@@ -60,7 +66,7 @@ public class Main {
         meanCost = mean(randomCostsD);
         System.out.println("mean: " + meanCost);
         System.out.println("min: " + Collections.min(randomCostsD));
-        System.out.println("min: " + Collections.max(randomCostsD));
+        System.out.println("max: " + Collections.max(randomCostsD));
         System.out.println("std: " + std(randomCostsD, meanCost));
 
         System.out.println("===================================================");
@@ -74,7 +80,7 @@ public class Main {
         meanCost = mean(HCCostsD);
         System.out.println("mean: " + meanCost);
         System.out.println("min: " + Collections.min(HCCostsD));
-        System.out.println("min: " + Collections.max(HCCostsD));
+        System.out.println("max: " + Collections.max(HCCostsD));
         System.out.println("std: " + std(HCCostsD, meanCost));
     }
 
@@ -103,7 +109,7 @@ public class Main {
             double diff = tourCosts.get(i) - mean;
             sumSq += diff * diff;
         }
-        std = Math.sqrt(sumSq/tourCosts.size());
+        std = Math.sqrt(sumSq / tourCosts.size());
         return std;
     }
 }
