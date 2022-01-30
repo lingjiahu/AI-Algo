@@ -67,16 +67,24 @@ public class Main {
 
         System.out.println("part d-2: 100 optimal tours (100 cities) by hill climbing search");
         ArrayList<Double> HCCostsD = new ArrayList<>();
+//        for (int i = 0; i < 100; i++) {
+//            HCCostsD.add(randomTSPs.get(i).HillClimbingOptimalTour());
+//        }
+
+        cnt = 0;
         for (int i = 0; i < 100; i++) {
-            HCCostsD.add(randomTSPs.get(i).HillClimbingOptimalTour());
+            double cost = randomTSPs.get(i).HillClimbingOptimalTour();
+            if (cost == BFCosts.get(i)) {
+                cnt++;
+            }
+            HCCostsD.add(cost);
         }
+
         meanCost = mean(HCCostsD);
         System.out.println("mean: " + meanCost);
         System.out.println("min: " + Collections.min(HCCostsD));
         System.out.println("min: " + Collections.max(HCCostsD));
         System.out.println("std: " + std(HCCostsD, meanCost));
-
-
     }
 
     // generate 100 random TSP instances, involving numCities cities

@@ -16,7 +16,6 @@ public class TSP {
             randomCities.add(new City());
         }
         this.cities = randomCities;
-//        constructDT(numCities);
     }
 
     // search all possible routes by brute force, return the cost of the shortest one
@@ -100,10 +99,10 @@ public class TSP {
     public ArrayList<ArrayList<City>> getNeighbours(ArrayList<City> curTour) {
         ArrayList<ArrayList<City>> neighbours = new ArrayList<>();
         for (int i  = 0; i < curTour.size() - 1; i++) { // i < j
-            for (int j = i+1; j < curTour.size(); j++) {
+            for (int j = i+1; j < curTour.size() && j != i; j++) {
                 ArrayList<City> permutedTour = new ArrayList<>();
-                for (int k = 0; k <= i -1; k++) {
-                    permutedTour.add(curTour.get(i));
+                for (int k = 0; k < i; k++) {
+                    permutedTour.add(curTour.get(k));
                 }
                 for (int k = j; k >= i; k--) {
                     permutedTour.add(curTour.get(k));
@@ -116,27 +115,6 @@ public class TSP {
             }
         }
         return neighbours;
-    }
-
-    // construct distance table
-    public void constructDT(int numCities) {
-        City c1;
-        City c2;
-        double xDiff;
-        double yDiff;
-        double distance;
-        for (int i = 0; i < numCities; i++) {
-            HashMap<City, Double> distList = new HashMap<>();
-            c1 = this.cities.get(i);
-            for (int j = 0; j < numCities; j++) {
-                c2 = this.cities.get(j);
-                xDiff = c1.xCo - c2.xCo;
-                yDiff = c1.yCo - c2.yCo;
-                distance = Math.sqrt((xDiff*xDiff) + (yDiff*yDiff));
-                distList.put(c2, distance);
-            }
-            this.distanceTable.put(c1, distList);
-        }
     }
 
     // Generating permutation using Heap Algorithm
